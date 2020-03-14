@@ -1,9 +1,9 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers } from 'redux'
 
 const reducers = combineReducers({
 
-});
+})
 
-const store = createStore(reducers);
+const store = createStore(reducers)
 
-export default store;
+export default store

@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import Header from 'components/Header'
+import CardProduto from 'components/CardProduto'
 
-// import { Container } from './styles';
+import { Container, ProductList } from './styles'
 
-export default function Produto() {
+import { productsData } from 'config/MockProducts'
+
+export default function Produto () {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setProducts(productsData)
+    }, 1500)
+  }, [])
+
   return (
-    <div>Produto</div>
-  );
+    <Container>
+      <Header title='Produtos' />
+      <ProductList>
+        {products.map(product => (
+          <li key={product.idProduto}>
+            <CardProduto
+              urlImagem={product.urlImagem}
+              descricao={product.descricao}
+              valorFormatado={product.valorFormatado}
+              condicao={product.condicao}
+            />
+          </li>
+        ))}
+      </ProductList>
+    </Container>
+  )
 }

@@ -1,10 +1,10 @@
 
-import React from "react";
-import { GlobalStyle } from "config/styles";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Produto from "pages/Produto";
+import React from 'react'
+import { GlobalStyle } from 'config/styles'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Produto from 'pages/Produto'
 
-export default function Routes() {
+export default function Routes () {
   return (
     <>
       <GlobalStyle />
@@ -14,5 +14,5 @@ export default function Routes() {
         </Switch>
       </Router>
     </>
-  );
+  )
 }
