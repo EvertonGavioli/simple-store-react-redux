@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { createMuiTheme } from '@material-ui/core/styles'
 
 export const GlobalStyle = createGlobalStyle`
 *,
@@ -14,3 +15,14 @@ export const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 `
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#019cdf'
+    },
+    secondary: {
+      main: '#ff9800'
+    }
+  }
+})
