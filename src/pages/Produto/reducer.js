@@ -17,6 +17,14 @@ export default function productReducer (state = INITIAL_STATE, action) {
       return { ...state, cartProducts: action.payload }
     case productActions.UPDATE_TOTAL:
       return { ...state, totalProducts: action.payload }
+    case productActions.RESET_PRODUCT:
+      return {
+        ...state,
+        idSelectedProduct: null,
+        quantityProducts: [],
+        cartProducts: [],
+        totalProducts: 0
+      }
     default:
       return state
   }

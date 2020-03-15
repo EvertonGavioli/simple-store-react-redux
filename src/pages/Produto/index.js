@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import { productsData } from 'config/MockProducts'
 import { useSelector, useDispatch } from 'react-redux'
 import { FormatCurrencyBRL } from 'config/utils'
@@ -13,8 +14,10 @@ import { Container, ProductList, FooterContainer, Total } from './styles'
 export default function Produto () {
   const dispatch = useDispatch()
   const [products, setProducts] = useState([])
+  const [redirect, setRedirect] = useState(false)
 
   const { idSelectedProduct, quantityProducts, totalProducts } = useSelector(state => state.product)
+  const { clientForm } = useSelector(state => state.form)
   const currentQuantity = quantityProducts.find(obj => obj.idProduct === idSelectedProduct)
   const quantity = currentQuantity ? currentQuantity.quantity : 0
 
@@ -43,8 +46,23 @@ export default function Produto () {
     dispatch(productActions.addProductOnCart(product))
   }
 
+  function finalizarClick () {
+    if ((clientForm && clientForm.syncErrors) || totalProducts <= 0) return
+    setRedirect(true)
+  }
+
   return (
     <Container>
+      {redirect && <Redirect to={
+        {
+          pathname: '/finalizar',
+          state: {
+            NomeCliente: clientForm.values.Nome,
+            ValorCompra: FormatCurrencyBRL(totalProducts)
+          }
+        }}
+      />}
+
       <Header title='Produtos' />
       <ProductList>
         {products.map(product => (
@@ -68,7 +86,7 @@ export default function Produto () {
 
       <FooterContainer>
         <Total>Total: {FormatCurrencyBRL(totalProducts)}</Total>
-        <FinalizarButton color="secondary">
+        <FinalizarButton onClick={finalizarClick} color="secondary">
           Finalizar Compra
         </FinalizarButton>
       </FooterContainer>
