@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { productsData } from 'config/MockProducts'
 import { useSelector, useDispatch } from 'react-redux'
+import { FormatCurrencyBRL } from 'config/utils'
 import Header from 'components/Header'
 import CardProduct from 'components/CardProduct'
 import ClientForm from './ClientForm'
@@ -11,11 +12,11 @@ import { Container, ProductList, FooterContainer, Total } from './styles'
 
 export default function Produto () {
   const dispatch = useDispatch()
-  const { idSelectedProduct, quantityProducts } = useSelector(state => state.product)
+  const [products, setProducts] = useState([])
+
+  const { idSelectedProduct, quantityProducts, totalProducts } = useSelector(state => state.product)
   const currentQuantity = quantityProducts.find(obj => obj.idProduct === idSelectedProduct)
   const quantity = currentQuantity ? currentQuantity.quantity : 0
-
-  const [products, setProducts] = useState([])
 
   useEffect(() => {
     setProducts(productsData)
@@ -29,6 +30,19 @@ export default function Produto () {
     dispatch(productActions.setQuantity(value))
   }
 
+  function adicionarClick (event) {
+    event.stopPropagation()
+    const produto = products.find(obj => obj.idProduto === idSelectedProduct)
+
+    const product = {
+      idProduct: idSelectedProduct,
+      quantity: quantity,
+      price: produto.valor
+    }
+
+    dispatch(productActions.addProductOnCart(product))
+  }
+
   return (
     <Container>
       <Header title='Produtos' />
@@ -36,7 +50,8 @@ export default function Produto () {
         {products.map(product => (
           <li key={product.idProduto}>
             <CardProduct
-              onClick={() => cardProductClick(product.idProduto)}
+              onCardClick={() => cardProductClick(product.idProduto)}
+              onAdicionarClick={adicionarClick}
               onQuantityChanged={quantityProductChanged}
               quantity={quantity}
               urlImagem={product.urlImagem}
@@ -52,7 +67,7 @@ export default function Produto () {
       <ClientForm />
 
       <FooterContainer>
-        <Total>Total: R$ 0,00</Total>
+        <Total>Total: {FormatCurrencyBRL(totalProducts)}</Total>
         <FinalizarButton color="secondary">
           Finalizar Compra
         </FinalizarButton>

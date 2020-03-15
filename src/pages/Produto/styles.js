@@ -53,4 +53,5 @@ export const Total = styled.span`
   color: #546e7a;
   font-weight: 700;
   margin-bottom: 14px;
+  text-align: end;
 `

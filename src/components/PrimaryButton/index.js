@@ -10,12 +10,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const PrimaryButton = ({ color, children }) => {
+const PrimaryButton = ({ color, children, ...rest }) => {
   const classes = useStyles()
 
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained" color={color} className={classes.root}>
+      <Button {...rest} variant="contained" color={color} className={classes.root}>
         {children}
       </Button>
     </ThemeProvider>

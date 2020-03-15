@@ -8,7 +8,7 @@ import { Container, Imagem, InfoContainer, Descricao, Valor, Condicao } from './
 const CardProduct = (props) => {
   return (
     <Container
-      onClick={props.onClick}
+      onClick={props.onCardClick}
       selecionado={props.selecionado}
     >
       <Imagem src={props.urlImagem} alt={'Falha ao Carregar...'} />
@@ -25,7 +25,9 @@ const CardProduct = (props) => {
               onQuantityChanged={props.onQuantityChanged}
               quantity={props.quantity}
             />
-            <PrimaryButton color={'primary'}>
+            <PrimaryButton
+              onClick={props.onAdicionarClick}
+              color={'primary'}>
               Adicionar
             </PrimaryButton>
           </>
@@ -36,7 +38,8 @@ const CardProduct = (props) => {
 }
 
 CardProduct.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onAdicionarClick: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func.isRequired,
   onQuantityChanged: PropTypes.func.isRequired,
   quantity: PropTypes.number.isRequired,
   urlImagem: PropTypes.string.isRequired,

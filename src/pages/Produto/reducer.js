@@ -3,7 +3,8 @@ import { productActions } from 'config/actions'
 const INITIAL_STATE = {
   idSelectedProduct: null,
   quantityProducts: [],
-  cartProducts: []
+  cartProducts: [],
+  totalProducts: 0
 }
 
 export default function productReducer (state = INITIAL_STATE, action) {
@@ -14,6 +15,8 @@ export default function productReducer (state = INITIAL_STATE, action) {
       return { ...state, quantityProducts: action.payload }
     case productActions.ADD_PRODUCT_CART:
       return { ...state, cartProducts: action.payload }
+    case productActions.UPDATE_TOTAL:
+      return { ...state, totalProducts: action.payload }
     default:
       return state
   }

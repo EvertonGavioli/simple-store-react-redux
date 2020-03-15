@@ -23,6 +23,27 @@ export const setQuantity = quantity => dispatch => {
 }
 
 export const addProductOnCart = product => dispatch => {
-  console.log(product)
-  // dispatch({ type: productActions.ADD_PRODUCT_CART, payload: cartProducts })
+  if (!product || product.quantity < 0) return
+
+  const { cartProducts } = store.getState().product
+
+  const index = cartProducts.findIndex(obj => obj.idProduct === product.idProduct)
+
+  if (index >= 0) {
+    cartProducts[index].quantity = product.quantity
+    cartProducts[index].price = product.price
+    cartProducts[index].total = product.price * product.quantity
+  } else {
+    cartProducts.push({
+      idProduct: product.idProduct,
+      quantity: product.quantity,
+      price: product.price,
+      total: product.price * product.quantity
+    })
+  }
+
+  const updateTotal = cartProducts.reduce((acc, curr) => acc + curr.total, 0)
+
+  dispatch({ type: productActions.ADD_PRODUCT_CART, payload: cartProducts })
+  dispatch({ type: productActions.UPDATE_TOTAL, payload: updateTotal })
 }
