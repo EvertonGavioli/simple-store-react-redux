@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Container, ProductList } from './styles'
 import { productsData } from 'config/MockProducts'
 import { useSelector, useDispatch } from 'react-redux'
 import Header from 'components/Header'
 import CardProduct from 'components/CardProduct'
 import * as productActions from './actions'
+
+import ClientForm from './ClientForm'
+
+import { Container, ProductList } from './styles'
 
 export default function Produto () {
   const dispatch = useDispatch()
@@ -39,6 +42,8 @@ export default function Produto () {
           </li>
         ))}
       </ProductList>
+
+      <ClientForm />
     </Container>
   )
 }
