@@ -15,8 +15,9 @@ import {
 
 export default function FinalizacaoCompra (props) {
   const dispatch = useDispatch()
+
   const [redirect, setRedirect] = useState(false)
-  const { NomeCliente, ValorCompra } = props.location.state
+  const { NomeCliente, ValorCompra } = props.location.state ? props.location.state : ''
 
   function novaCompra () {
     dispatch(productActions.resetProductState)
@@ -27,14 +28,19 @@ export default function FinalizacaoCompra (props) {
     <Wrapper>
       <Container>
         {redirect && <Redirect to="/" />}
-        <NomeContainer>{NomeCliente},</NomeContainer>
+        <NomeContainer>
+          {NomeCliente},
+        </NomeContainer>
         <TextoCompra>
           Sua compra no valor de <span>{ValorCompra}</span><br />
           foi finalizada com sucesso
         </TextoCompra>
         <Image src="/assets/images/purchase.png" />
         <NovaCompraContainer>
-          <NovaCompraButtom onClick={() => novaCompra()} color="secondary">
+          <NovaCompraButtom
+            onClick={() => novaCompra()}
+            color="secondary"
+          >
             iniciar nova compra
           </NovaCompraButtom>
         </NovaCompraContainer>

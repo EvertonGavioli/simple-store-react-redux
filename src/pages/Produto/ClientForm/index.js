@@ -5,31 +5,13 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import TextField from '@material-ui/core/TextField'
-
 import Header from 'components/Header'
+import validate from './formValidade'
 
-import { Container, Form } from './styles'
-
-const validate = values => {
-  const errors = {}
-  const requiredFields = [
-    'Nome',
-    'Email',
-    'Sexo'
-  ]
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Campo Obrigatório'
-    }
-  })
-  if (
-    values.Email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.Email)
-  ) {
-    errors.Email = 'Email inválido'
-  }
-  return errors
-}
+import {
+  Container,
+  Form
+} from './styles'
 
 const InputName = ({ input, label, meta: { touched, invalid, error }, ...custom }) => {
   return (
@@ -92,7 +74,7 @@ const InputSelect = ({ input, label, meta: { touched, error }, ...custom }) => {
 
         native
         autoWidth
-        labelWidth={85}
+        labelWidth={50}
         inputProps={{
           name: 'sexo',
           id: 'outlined-basic-input-sexo'

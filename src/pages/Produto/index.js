@@ -9,7 +9,12 @@ import ClientForm from './ClientForm'
 import FinalizarButton from 'components/PrimaryButton'
 import * as productActions from './actions'
 
-import { Container, ProductList, FooterContainer, Total } from './styles'
+import {
+  Container,
+  ProductList,
+  FooterContainer,
+  Total
+} from './styles'
 
 export default function Produto () {
   const dispatch = useDispatch()
@@ -25,16 +30,17 @@ export default function Produto () {
     setProducts(productsData)
   }, [])
 
-  function cardProductClick (idProduto) {
+  function handleSelectedProduct (idProduto) {
     dispatch(productActions.setIdSelectedProduct(idProduto))
   }
 
-  function quantityProductChanged (value) {
+  function handleQuantityChanged (value) {
     dispatch(productActions.setQuantity(value))
   }
 
-  function adicionarClick (event) {
+  function handleAddProductToCart (event) {
     event.stopPropagation()
+
     const produto = products.find(obj => obj.idProduto === idSelectedProduct)
 
     const product = {
@@ -46,7 +52,7 @@ export default function Produto () {
     dispatch(productActions.addProductOnCart(product))
   }
 
-  function finalizarClick () {
+  function handleFinishButtom () {
     if ((clientForm && clientForm.syncErrors) || totalProducts <= 0) return
     setRedirect(true)
   }
@@ -68,9 +74,9 @@ export default function Produto () {
         {products.map(product => (
           <li key={product.idProduto}>
             <CardProduct
-              onCardClick={() => cardProductClick(product.idProduto)}
-              onAdicionarClick={adicionarClick}
-              onQuantityChanged={quantityProductChanged}
+              onCardClick={() => handleSelectedProduct(product.idProduto)}
+              onAdicionarClick={handleAddProductToCart}
+              onQuantityChanged={handleQuantityChanged}
               quantity={quantity}
               urlImagem={product.urlImagem}
               descricao={product.descricao}
@@ -86,7 +92,10 @@ export default function Produto () {
 
       <FooterContainer>
         <Total>Total: {FormatCurrencyBRL(totalProducts)}</Total>
-        <FinalizarButton onClick={finalizarClick} color="secondary">
+        <FinalizarButton
+          onClick={handleFinishButtom}
+          color="secondary"
+        >
           Finalizar Compra
         </FinalizarButton>
       </FooterContainer>

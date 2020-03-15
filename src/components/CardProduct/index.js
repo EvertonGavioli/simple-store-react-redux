@@ -1,9 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import QuantitySelector from 'components/QuantitySelector'
 import PrimaryButton from 'components/PrimaryButton'
+import QuantitySelector from 'components/QuantitySelector'
 
-import { Container, Imagem, InfoContainer, Descricao, Valor, Condicao } from './styles'
+import {
+  Container,
+  Imagem,
+  InfoContainer,
+  Descricao,
+  Valor,
+  Condicao
+} from './styles'
 
 const CardProduct = (props) => {
   return (
@@ -11,7 +18,10 @@ const CardProduct = (props) => {
       onClick={props.onCardClick}
       selecionado={props.selecionado}
     >
-      <Imagem src={props.urlImagem} alt={'Falha ao Carregar...'} />
+      <Imagem
+        src={props.urlImagem}
+        alt={'Falha ao Carregar...'}
+      />
       <InfoContainer
         selecionado={props.selecionado}
       >
@@ -27,7 +37,8 @@ const CardProduct = (props) => {
             />
             <PrimaryButton
               onClick={props.onAdicionarClick}
-              color={'primary'}>
+              color={'primary'}
+            >
               Adicionar
             </PrimaryButton>
           </>

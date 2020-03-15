@@ -14,7 +14,6 @@ export const Container = styled.div`
   @media screen and (min-width: 1140px) {
     margin: 64px auto;
   }
-
 `
 
 export const ProductList = styled.ul`
@@ -36,7 +35,6 @@ export const ProductList = styled.ul`
   @media screen and (min-width: 1140px) {
     grid-template-columns: repeat(4, 1fr);
   }
-
 `
 
 export const FooterContainer = styled.div`

@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Container, Title } from './styles'
+import {
+  Container,
+  Title
+} from './styles'
 
 const Header = (props) => {
   return (
