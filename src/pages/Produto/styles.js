@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   max-width: 1140px;
-
+  
   @media screen and (max-width: 720px) {
     margin: 24px;
   }
@@ -37,4 +37,20 @@ export const ProductList = styled.ul`
     grid-template-columns: repeat(4, 1fr);
   }
 
+`
+
+export const FooterContainer = styled.div`
+  margin: 80px 8px;
+  display: flex;
+  flex-direction: column;
+  float: right;
+  min-width: 200px;
+`
+
+export const Total = styled.span`
+  font-size: 24px;
+  line-height: 18px;
+  color: #546e7a;
+  font-weight: 700;
+  margin-bottom: 14px;
 `

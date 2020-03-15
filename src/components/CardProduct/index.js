@@ -21,7 +21,10 @@ const CardProduct = (props) => {
 
         {props.selecionado && (
           <>
-            <QuantitySelector />
+            <QuantitySelector
+              onQuantityChanged={props.onQuantityChanged}
+              quantity={props.quantity}
+            />
             <PrimaryButton color={'primary'}>
               Adicionar
             </PrimaryButton>
@@ -34,6 +37,8 @@ const CardProduct = (props) => {
 
 CardProduct.propTypes = {
   onClick: PropTypes.func.isRequired,
+  onQuantityChanged: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
   urlImagem: PropTypes.string.isRequired,
   descricao: PropTypes.string.isRequired,
   valorFormatado: PropTypes.string.isRequired,

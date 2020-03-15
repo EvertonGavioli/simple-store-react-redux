@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Container, Button, Input } from './styles'
 
-export default function QuantitySelector () {
-  const [quantity, setQuantity] = useState(0)
+const QuantitySelector = (props) => {
+  const { quantity } = props
 
   function removeButtonClick (event) {
     event.stopPropagation()
-    if (quantity > 0) setQuantity(quantity - 1)
+
+    if (quantity > 0) {
+      props.onQuantityChanged(quantity - 1)
+    }
   }
 
   function addButtonClick (event) {
     event.stopPropagation()
-    setQuantity(quantity + 1)
+
+    props.onQuantityChanged(quantity + 1)
   }
 
   return (
@@ -23,7 +28,7 @@ export default function QuantitySelector () {
 
       <Input
         readOnly
-        value={quantity}
+        value={props.quantity}
       />
 
       <Button onClick={event => addButtonClick(event)}>
@@ -32,3 +37,14 @@ export default function QuantitySelector () {
     </Container>
   )
 }
+
+QuantitySelector.propTypes = {
+  quantity: PropTypes.number.isRequired,
+  onQuantityChanged: PropTypes.func.isRequired
+}
+
+QuantitySelector.defaultProps = {
+  quantity: 0
+}
+
+export default QuantitySelector

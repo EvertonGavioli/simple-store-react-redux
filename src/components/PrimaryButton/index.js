@@ -1,13 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import { theme } from 'config/styles'
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    color: 'white'
+  }
+}))
+
 const PrimaryButton = ({ color, children }) => {
+  const classes = useStyles()
+
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained" color={color}>
+      <Button variant="contained" color={color} className={classes.root}>
         {children}
       </Button>
     </ThemeProvider>
